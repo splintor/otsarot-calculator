@@ -1,0 +1,20 @@
+.SetupForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.SetupForm label {
+  margin-block-start: 10px;
+}
+
+.SetupForm label input {
+  margin-inline-start: 20px;
+  font-size: 1.1em;
+}
+
+.StartButton {
+  margin: 30px;
+  padding: 10px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}

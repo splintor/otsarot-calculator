@@ -1,0 +1,13 @@
+Deploy to GitHub
+Publish on now.sh
+Add actions menu (hamburger) in GameBoard. Options:
+  a. Game Setup
+  b. Game instructions
+  c. Contact the Developer
+Save users and game state
+BUG: When there is a scrollbar, totals are not aligned to data
+Back navigation should go to Page Setup (and also close open modal?)
+In page setup, add "New Game" if we edit it in the middle of the game
+Set proper style and colors
+Mark the leading player
+Add Delete Score confirmation dialog / cancelable toast ?

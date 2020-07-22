@@ -1,0 +1,48 @@
+.NumberDialogBackdrop, .NumberDialogModal {
+  direction: rtl;
+  position: fixed;
+}
+
+.NumberDialogBackdrop {
+  z-index: 200;
+  background-color: black;
+  opacity: .7;
+  display: flex;
+  top: 162px;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.NumberDialogModal {
+  z-index: 201;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 4px solid blue;
+  border-radius: 8px;
+  margin: auto;
+  padding: 30px;
+}
+
+.NumberDialogContent input {
+  margin-inline-end: 10px;
+  font-size: 1.1em;
+  direction: ltr;
+  text-align: right;
+}
+
+.NumberDialogFooter {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.NumberDialogFooter button {
+  margin-top: 20px;
+  font-size: 1.1em
+}
+
+.PlayerName {
+  font-weight: bold;
+}

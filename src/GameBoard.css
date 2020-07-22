@@ -1,0 +1,86 @@
+.GameBoard-Header {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 0;
+  width: 100vw;
+  direction: rtl;
+  position: fixed;
+  top: 59px;
+  z-index: 100;
+}
+
+.GameBoard-Body {
+  position: absolute;
+  top: 102px;
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  direction: rtl;
+}
+
+/* https://stackoverflow.com/a/50781428/46635 */
+@keyframes spin {
+  0% {
+    transform: rotate(-45deg);
+  }
+}
+
+.Winner {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 1.6em;
+  animation: spin 1ms; /* animation-duration must be > 0 */
+  animation-play-state: paused;
+}
+
+.PlayerTitle, .PlayerColumn {
+  flex: 1 1 0;
+}
+
+.PlayerTitle {
+  background-color: lightgrey;
+}
+
+.PlayerTotal {
+  display: flex;
+  direction: rtl;
+  align-items: center;
+}
+
+.PlayerTotal .Total {
+  font-size: 1.6em;
+  font-weight: bold;
+  direction: ltr;
+  margin-inline-end: 5px;
+}
+
+.Score {
+  position: relative;
+  border: 1px solid blue;
+  height: 100px;
+  direction: ltr;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Score span {
+  cursor: pointer;
+}
+
+.PlayerRemoveScoreButton {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  padding: 5px;
+  cursor: pointer;
+  color: red;
+  font-size: 0.7em;
+}
+
+.PlayerRemoveScoreButton:hover {
+  background-color: lightgrey;
+  border: 1px solid red;
+  border-radius: 50%;
+}

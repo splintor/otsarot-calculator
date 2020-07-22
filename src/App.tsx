@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { SetupScreen } from './SetupScreen';
+import { Player } from './Player';
+import { GameBoard } from './GameBoard';
 
 function App() {
+  const [gameStep, setGameStep] = useState('setup')
+  const [players, setPlayers] = useState<Player[]>([])
+
+  const setPlayerScores = (player: Player, scores: Player['scores']) => {
+    const newPlayers = players.map((p) => p === player ? new Player(player.name, scores) : p);
+    setPlayers(newPlayers);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="AppMenu">☰</div>
+      <h2>אוצרות או צרות</h2>
+      <div className="GameBody">
+        {
+          gameStep === 'setup' &&
+          <SetupScreen onStart={(players: Player[]) => {
+            setGameStep('play');
+            setPlayers(players);
+          }}/>
+        }
+        {
+          gameStep === 'play' &&
+          <GameBoard players={players} setPlayerScores={setPlayerScores}/>
+        }
+      </div>
     </div>
   );
 }
