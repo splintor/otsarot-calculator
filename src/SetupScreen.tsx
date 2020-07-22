@@ -60,7 +60,7 @@ export const SetupScreen = ({ players, setPlayers, onStart }: SetupScreenProps) 
   return (
     <div className="SetupForm">
       <div className="Instruction">
-        האתר הזה מיועד לעזור בניהול התוצאות במשחק <a href="https://www.shafirgames.com" target="_blank">אוצרות או צרות</a> של <a href="https://www.shafirgames.com/otzarot" target="_blank">משחקי שפיר</a>.
+        האתר הזה מיועד לעזור בניהול הניקוד במשחק <a href="https://www.shafirgames.com" target="_blank">אוצרות או צרות</a> של <a href="https://www.shafirgames.com/otzarot" target="_blank">משחקי שפיר</a>.
         <p/>
         האתר לא משמש תחליף למשחק עצמו - להחלפת הקלפים, לזריקת הקוביות, ולחישוב הניקוד שמתקבל בסוף כל שלב.
         <p/>
