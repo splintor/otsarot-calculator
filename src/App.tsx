@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App" onClick={() => setAppMenuVisible(false)}>
       <div className="AppMenuButton" onClick={toggleMenu}>☰</div>
-      <h2>אוצרות או צרות</h2>
+      <h2>מחשבון אוצרות או צרות</h2>
       <div className="GameBody">
         {
           gameStep === 'setup' &&
@@ -48,10 +48,9 @@ function App() {
           {gameStep === 'play' && <li key="setup"><a href="#" onClick={moveToSetup}>הגדרות משחק</a></li>}
           {(players.length > 1 || gameStep === 'play') &&
           <li key="new-game"><a href="#" onClick={startNewGame}>משחק חדש</a></li>}
-          <li key="game-guide"><a href="https://www.youtube.com/watch?v=rxRgGBmVUnA" target="_blank">איך משחקים?</a>
-          </li>
-          <li key="mailto"><a href="mailto:splintor@gmail.com?Subject=אוצרות+או+צרות" target="_blank">שלח משוב...</a>
-          </li>
+          <li key="game-guide"><a href="https://3cc8ed0a-ab93-4ddb-a7c1-d9ce02d75f95.filesusr.com/ugd/2192a6_9e8b173e857b4ed7af589965976c34a8.pdf" target="_blank">הוראות המשחק</a></li>
+          <li key="game-video"><a href="https://www.youtube.com/watch?v=rxRgGBmVUnA" target="_blank">סרטון הדרכה</a></li>
+          <li key="mailto"><a href="mailto:splintor@gmail.com?Subject=אוצרות+או+צרות" target="_blank">שלח משוב...</a></li>
           <li key="github"><a href="https://github.com/splintor/otsarot-calculator" target="_blank">GitHub</a></li>
         </ul>
       </nav>

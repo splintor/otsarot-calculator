@@ -13,6 +13,13 @@ h2 {
   z-index: 100;
 }
 
+.Instruction {
+  direction: rtl;
+  text-align: start;
+  width: 45vw;
+  margin: 10px auto 20px;
+}
+
 .AppMenuButton {
   position: fixed;
   z-index: 110;
