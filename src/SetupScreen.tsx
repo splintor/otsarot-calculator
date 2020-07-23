@@ -60,13 +60,11 @@ export const SetupScreen = ({ players, setPlayers, onStart }: SetupScreenProps) 
   return (
     <div className="SetupForm">
       <div className="Instruction">
-        האתר הזה מיועד לעזור בניהול הניקוד במשחק <a href="https://www.shafirgames.com" target="_blank">אוצרות או צרות</a> של <a href="https://www.shafirgames.com/otzarot" target="_blank">משחקי שפיר</a>.
+        האתר הזה מיועד לעזור בניהול הניקוד במשחק <a href="https://www.shafirgames.com" rel="noopener noreferrer"
+                                                    target="_blank">אוצרות או צרות</a> של <a
+        href="https://www.shafirgames.com/otzarot" rel="noopener noreferrer" target="_blank">משחקי שפיר</a>.
         <p/>
-        האתר לא משמש תחליף למשחק עצמו - להחלפת הקלפים, לזריקת הקוביות, ולחישוב הניקוד שמתקבל בסוף כל שלב.
-        <p/>
-        האתר רק עוזר לסכם ולעקוב אחרי הניקוד של כל אחד מהשחקנים במשחק.
-        <p/>
-        כדי להתחיל להשתמש במשחק, יש למלא את שמות השחקנים, וללחוץ על כפתור ההתחלה.
+        כדי להתחיל להשתמש באתר, יש למלא את שמות השחקנים, וללחוץ על כפתור ההתחלה.
       </div>
       {
         players.map((player, index) =>
@@ -89,6 +87,12 @@ export const SetupScreen = ({ players, setPlayers, onStart }: SetupScreenProps) 
         <button className="NewGameButton" onClick={startNewGame} dir="rtl" disabled={!Boolean(validPlayers)}>
           משחק חדש!
         </button>}
+      </div>
+      <div className="Instruction">
+        <p/>
+        האתר לא משמש תחליף למשחק עצמו - להחלפת הקלפים, לזריקת הקוביות, ולחישוב הניקוד שמתקבל בסוף כל שלב.
+        <p/>
+        האתר רק עוזר לסכם ולעקוב אחרי הניקוד של כל אחד מהשחקנים במשחק.
       </div>
     </div>
   )
