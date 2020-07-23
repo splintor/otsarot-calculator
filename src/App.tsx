@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from 'react';
+import React, { useState, MouseEvent, MouseEventHandler } from 'react';
 import './App.css';
 import { SetupScreen } from './SetupScreen';
 import { Player } from './Player';
@@ -12,6 +12,11 @@ function App() {
   const setPlayerScores = (player: Player, scores: Player['scores']) => {
     const newPlayers = players.map((p) => p === player ? new Player(player.name, scores) : p);
     setPlayers(newPlayers);
+  }
+
+  const menuHandler = (fn: () => void): MouseEventHandler => (event: MouseEvent) => {
+    event.preventDefault();
+    fn();
   }
 
   const moveToSetup = () => setGameStep('setup');
@@ -47,12 +52,12 @@ function App() {
         <ul>
           {gameStep === 'play' &&
           <li key="setup">
-            <a href="/" onClick={moveToSetup}>הגדרות משחק</a>
+            <a href="/" onClick={menuHandler(moveToSetup)}>הגדרות משחק</a>
           </li>
           }
           {(players.length > 1 || gameStep === 'play') &&
           <li key="new-game">
-            <a href="/" onClick={startNewGame}>משחק חדש</a>
+            <a href="/" onClick={menuHandler(startNewGame)}>משחק חדש</a>
           </li>
           }
           <li key="game-guide">
