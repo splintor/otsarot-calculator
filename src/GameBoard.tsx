@@ -43,7 +43,7 @@ export const GameBoard = ({ players, setPlayerScores: setPlayerScore }: GameBoar
             <div className="PlayerTotal">
               <div>סה"כ: </div>
               <div className="Total">{player.total}</div>
-              {player.isWinner && <div className="Winner">👑</div>}
+              {player.isWinner && <div className="Winner"><span role="img" aria-label="Winner Icon">👑</span></div>}
             </div>
           </div>
         </div>)}
