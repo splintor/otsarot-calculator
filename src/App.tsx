@@ -1,13 +1,26 @@
-import React, { useState, MouseEvent, MouseEventHandler } from 'react';
+import React, { useState, MouseEvent, MouseEventHandler, useEffect } from 'react';
 import './App.css';
 import { SetupScreen } from './SetupScreen';
 import { Player } from './Player';
 import { GameBoard } from './GameBoard';
 
+type GameSteps = 'setup' | 'play';
+
 function App() {
-  const [gameStep, setGameStep] = useState('setup')
+  const [gameStep, setGameStep] = useState<GameSteps>('setup')
   const [appMenuVisible, setAppMenuVisible] = useState(false)
   const [players, setPlayers] = useState<Player[]>([])
+
+  useEffect(() => {
+    document.title = gameStep === 'setup' ? 'מחשבון אוצרות או צרות - הגדות משחק' : 'מחשבון אוצרות או צרות';
+  }, [gameStep]);
+
+  useEffect(() => {
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, []);
+
+  const onPopState = (event: PopStateEvent) => setGameStep(event.state?.setup ? 'play' : 'setup');
 
   const setPlayerScores = (player: Player, scores: Player['scores']) => {
     const newPlayers = players.map((p) => p === player ? new Player(player.name, scores) : p);
@@ -19,7 +32,15 @@ function App() {
     fn();
   }
 
-  const moveToSetup = () => setGameStep('setup');
+  const moveToSetup = () => {
+    window.history.back();
+  };
+
+  const moveToGame = (players: Player[]) => {
+    setGameStep('play');
+    setPlayers(players);
+    window.history.pushState({ setup: true }, '');
+  }
 
   const startNewGame = () => {
     setPlayers([]);
@@ -38,10 +59,7 @@ function App() {
       <div className="GameBody">
         {
           gameStep === 'setup' &&
-          <SetupScreen players={players} setPlayers={setPlayers} onStart={(players: Player[]) => {
-            setGameStep('play');
-            setPlayers(players);
-          }}/>
+          <SetupScreen players={players} setPlayers={setPlayers} onStart={moveToGame}/>
         }
         {
           gameStep === 'play' &&
