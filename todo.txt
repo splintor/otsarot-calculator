@@ -1,6 +1,5 @@
 Save users and game state
 Back navigation should go to Page Setup (and also close open modal?)
 Set proper style and colors
-Mark the leading player
 Add Delete Score confirmation dialog / cancelable toast ?
 Add arrows support to game board

@@ -42,6 +42,10 @@
   background-color: lightgrey;
 }
 
+.PlayerTitle.MaxPlayer {
+  background-color: aquamarine;
+}
+
 .PlayerTotal {
   display: flex;
   direction: rtl;

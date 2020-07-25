@@ -1,4 +1,5 @@
 import React, { useState, MouseEvent } from 'react';
+import classNames from 'classnames';
 import { NumberDialog, NumberDialogProps } from './NumberDialog';
 import { Player } from './Player';
 import './GameBoard.css';
@@ -31,13 +32,20 @@ const onPlayerRemoveScoreClick = (setPlayerScores: GameBoardProps['setPlayerScor
   setPlayerScores(player, newScores);
 }
 
+function getMaxTotal(players: Player[]): number | undefined {
+  const maxTotal = players.reduce((result, { total }) => Math.max(result, total), -Infinity);
+  const allMax = players.every(({ total }) => total === maxTotal);
+  return allMax ? undefined : maxTotal;
+}
+
 export const GameBoard = ({ players, setPlayerScores: setPlayerScore }: GameBoardProps) => {
   const [numberDialogProps, setNumberDialogProps] = useState<NumberDialogProps | null>(null);
+  const maxTotal = getMaxTotal(players);
 
   return <div className="GameBoard">
     <div className="GameBoard-Header">
       {players.map((player, index) =>
-        <div className="PlayerTitle Score" key={index}>
+        <div className={classNames('PlayerTitle', 'Score', { MaxPlayer: player.total === maxTotal })} key={index}>
           <div>
             <div className="PlayerName">{player.name}</div>
             <div className="PlayerTotal">
