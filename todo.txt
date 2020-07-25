@@ -1,5 +1,4 @@
 Save users and game state
-BUG: When there is a scrollbar, totals are not aligned to data
 Back navigation should go to Page Setup (and also close open modal?)
 Set proper style and colors
 Replace favicon
