@@ -13,16 +13,16 @@ interface SetupScreenProps {
 
 const MaxPlayers = 6;
 
-function getLastNotEmptyPlayer(players: Player[]): number {
+function getLastNotEmptyPlayer(players: Player[], { onlyByName }: { onlyByName: boolean }): number {
   let lastNotEmptyPlayer = players.length - 1;
-  while (players[lastNotEmptyPlayer] && !players[lastNotEmptyPlayer].name && players[lastNotEmptyPlayer].scores.length === 0) {
+  while (players[lastNotEmptyPlayer] && !players[lastNotEmptyPlayer].name && (onlyByName || players[lastNotEmptyPlayer].scores.length === 0)) {
     --lastNotEmptyPlayer;
   }
   return lastNotEmptyPlayer;
 }
 
 function getValidPlayers(players: Player[]): Player[] | null {
-  const validPlayers = players.slice(0, getLastNotEmptyPlayer(players) + 1);
+  const validPlayers = players.slice(0, getLastNotEmptyPlayer(players, { onlyByName: true }) + 1);
   return validPlayers.length < 2 || validPlayers.some(p => !p.name) ? null : validPlayers;
 }
 
@@ -33,7 +33,7 @@ export const SetupScreen = ({ players, setPlayers, onStart }: SetupScreenProps) 
 
   const updatePlayer = (player: Player, name: string) => {
     let newPlayers = players.map(p => p === player ? new Player(name, p.scores) : p);
-    const lastNotEmptyPlayer = getLastNotEmptyPlayer(newPlayers);
+    const lastNotEmptyPlayer = getLastNotEmptyPlayer(newPlayers, { onlyByName: false });
 
     if (lastNotEmptyPlayer < newPlayers.length - 2) {
       newPlayers = newPlayers.slice(0, lastNotEmptyPlayer + 2);
