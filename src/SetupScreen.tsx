@@ -28,6 +28,8 @@ function getValidPlayers(players: Player[]): Player[] | null {
 
 export const SetupScreen = ({ players, setPlayers, onStart }: SetupScreenProps) => {
   const enterPressed = useKeyPress('Enter');
+  const downPressed = useKeyPress('ArrowDown');
+  const upPressed = useKeyPress('ArrowUp');
 
   const updatePlayer = (player: Player, name: string) => {
     let newPlayers = players.map(p => p === player ? new Player(name, p.scores) : p);
@@ -47,6 +49,23 @@ export const SetupScreen = ({ players, setPlayers, onStart }: SetupScreenProps) 
       setPlayers([...players, new Player()]);
     }
   }, [players, setPlayers]);
+
+  useEffect(() => {
+    if (downPressed || upPressed) {
+      const active = document.querySelector('input:focus');
+      if (active) {
+        const allInputs = Array.from(document.querySelectorAll('input'));
+        const activeIndex = allInputs.indexOf(active as any);
+        if (downPressed && activeIndex < allInputs.length - 1) {
+          allInputs[activeIndex + 1].focus();
+        }
+
+        if (upPressed && activeIndex > 0) {
+          allInputs[activeIndex - 1].focus();
+        }
+      }
+    }
+  }, [downPressed, upPressed]);
 
   const validPlayers = getValidPlayers(players);
   const gotoGame = () => validPlayers && onStart(validPlayers);
