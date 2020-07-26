@@ -37,23 +37,16 @@ export const SetupScreen = ({ players, setPlayers, onStart }: SetupScreenProps) 
   const somePlayersHasScores = players.some(p => p.scores.length > 0);
 
   const updatePlayer = (player: Player, name: string) => {
-    let newPlayers = players.map(p => p === player ? new Player(name, p.scores) : p);
+    let newPlayers = players.includes(player) ? players : [...players, player];
+    newPlayers = newPlayers.map(p => p === player ? new Player(name, p.scores) : p)
     const lastNotEmptyPlayer = getLastNotEmptyPlayer(newPlayers, { onlyByName: false });
 
-    if (lastNotEmptyPlayer < newPlayers.length - 2) {
-      newPlayers = newPlayers.slice(0, lastNotEmptyPlayer + 2);
-    } else if (lastNotEmptyPlayer === newPlayers.length - 1 && newPlayers.length < MaxPlayers) {
-      newPlayers = [...newPlayers, new Player('')];
+    if (lastNotEmptyPlayer < newPlayers.length - 1) {
+      newPlayers = newPlayers.slice(0, lastNotEmptyPlayer + 1);
     }
 
     setPlayers(newPlayers);
   }
-
-  useEffect(() => {
-    if (players.length === 0 || (players.length < MaxPlayers && players[players.length - 1].name)) {
-      setPlayers([...players, new Player()]);
-    }
-  }, [players, setPlayers]);
 
   useEffect(() => {
     if (downPressed || upPressed) {
@@ -86,7 +79,7 @@ export const SetupScreen = ({ players, setPlayers, onStart }: SetupScreenProps) 
         כדי להתחיל להשתמש באתר, יש למלא את שמות השחקנים, וללחוץ על כפתור ההתחלה.
       </div>
       {
-        players.map((player, index) =>
+        [...players, new Player()].map((player, index) =>
           <label htmlFor={`player${index}`} dir="rtl" key={index}>
             {`שחקנ/ית ${index + 1}:`}
             <input type="text"
