@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useKeyPress } from './hooks/useKeyPress';
 import { Player } from './Player';
 import './SetupScreen.css';
@@ -30,6 +30,11 @@ export const SetupScreen = ({ players, setPlayers, onStart }: SetupScreenProps) 
   const enterPressed = useKeyPress('Enter');
   const downPressed = useKeyPress('ArrowDown');
   const upPressed = useKeyPress('ArrowUp');
+
+  const validPlayers = getValidPlayers(players);
+  const gotoGame = useCallback(() => validPlayers && onStart(validPlayers), [onStart, validPlayers]);
+  const startNewGame = () => validPlayers && onStart(validPlayers.map(p => new Player(p.name)));
+  const somePlayersHasScores = players.some(p => p.scores.length > 0);
 
   const updatePlayer = (player: Player, name: string) => {
     let newPlayers = players.map(p => p === player ? new Player(name, p.scores) : p);
@@ -65,16 +70,11 @@ export const SetupScreen = ({ players, setPlayers, onStart }: SetupScreenProps) 
         }
       }
     }
-  }, [downPressed, upPressed]);
 
-  const validPlayers = getValidPlayers(players);
-  const gotoGame = () => validPlayers && onStart(validPlayers);
-  const startNewGame = () => validPlayers && onStart(validPlayers.map(p => new Player(p.name)));
-  const somePlayersHasScores = players.some(p => p.scores.length > 0);
-
-  if (enterPressed) {
-    gotoGame();
-  }
+    if (enterPressed) {
+      gotoGame();
+    }
+  }, [downPressed, upPressed, enterPressed, gotoGame]);
 
   return (
     <div className="SetupForm">
