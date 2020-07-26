@@ -1,5 +1,6 @@
-import React, { useState, MouseEvent } from 'react';
+import React, { useState, MouseEvent, useEffect } from 'react';
 import classNames from 'classnames';
+import { useKeyPress } from './hooks/useKeyPress';
 import { NumberDialog, NumberDialogProps } from './NumberDialog';
 import { Player } from './Player';
 import './GameBoard.css';
@@ -26,8 +27,8 @@ const onPlayerScoreClick = (setNumberDialogProps: (value: NumberDialogProps | nu
   });
 }
 
-const onPlayerRemoveScoreClick = (setPlayerScores: GameBoardProps['setPlayerScores'], player: Player, scoreIndex: number) => (event: MouseEvent) => {
-  event.stopPropagation();
+const onPlayerRemoveScoreClick = (setPlayerScores: GameBoardProps['setPlayerScores'], player: Player, scoreIndex: number) => (event?: MouseEvent) => {
+  event?.stopPropagation();
   const newScores = player.scores.filter((_, i) => i !== scoreIndex);
   setPlayerScores(player, newScores);
 }
@@ -40,6 +41,72 @@ function getMaxTotal(players: Player[]): number | undefined {
 
 export const GameBoard = ({ players, setPlayerScores: setPlayerScore }: GameBoardProps) => {
   const [numberDialogProps, setNumberDialogProps] = useState<NumberDialogProps | null>(null);
+  const [activePlayerIndex, setActivePlayerIndex] = useState<number>();
+  const [activeScoreIndex, setActiveScoreIndex] = useState<number>();
+  const [enterIsMeantToNumberDialog, setEnterIsMeantToNumberDialog] = useState(false);
+  const enterPressed = useKeyPress('Enter');
+  const spacePressed = useKeyPress(' ');
+  const deletePressed = useKeyPress('Delete');
+  const downPressed = useKeyPress('ArrowDown');
+  const upPressed = useKeyPress('ArrowUp');
+  const leftPressed = useKeyPress('ArrowLeft');
+  const rightPressed = useKeyPress('ArrowRight');
+
+  useEffect(() => {
+    if (activePlayerIndex !== undefined && activeScoreIndex !== undefined) {
+      const activePlayer = players[activePlayerIndex];
+      if (enterPressed || spacePressed) {
+        if (enterIsMeantToNumberDialog) {
+          if (!numberDialogProps) {
+            setEnterIsMeantToNumberDialog(false);
+          }
+        } else {
+          if (numberDialogProps) {
+            setEnterIsMeantToNumberDialog(true);
+          } else {
+            onPlayerScoreClick(setNumberDialogProps, setPlayerScore, activePlayer, activePlayerIndex, activeScoreIndex)();
+          }
+        }
+      }
+
+      if (deletePressed && activeScoreIndex < activePlayer.scores.length && !numberDialogProps) {
+        onPlayerRemoveScoreClick(setPlayerScore, activePlayer, activeScoreIndex)(undefined);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enterPressed, spacePressed, deletePressed, activeScoreIndex, activePlayerIndex, setPlayerScore, players, numberDialogProps])
+
+  useEffect(() => {
+    if (downPressed || upPressed) {
+      if (activePlayerIndex === undefined) {
+        setActivePlayerIndex(0);
+        setActiveScoreIndex(downPressed ? 0 : players[0].scores.length);
+        return;
+      }
+
+      setActiveScoreIndex(activeScoreIndex === undefined ? 0 :
+        downPressed
+          ? Math.min(activeScoreIndex + 1, players[activePlayerIndex].scores.length)
+          : Math.max(activeScoreIndex - 1, 0))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [upPressed, downPressed]);
+
+  useEffect(() => {
+    if (leftPressed || rightPressed) {
+      if (activePlayerIndex === undefined) {
+        setActivePlayerIndex(leftPressed ? 0 : players.length - 1);
+        setActiveScoreIndex(0);
+        return;
+      }
+
+      const newPlayerIndex = leftPressed ? Math.min(activePlayerIndex + 1, players.length - 1) : Math.max(activePlayerIndex - 1, 0);
+      setActivePlayerIndex(newPlayerIndex);
+      setActiveScoreIndex(activeScoreIndex === undefined ? 0 : Math.min(activeScoreIndex, players[newPlayerIndex].scores.length))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [leftPressed, rightPressed]);
+
   const maxTotal = getMaxTotal(players);
 
   return <div className="GameBoard">
@@ -62,7 +129,7 @@ export const GameBoard = ({ players, setPlayerScores: setPlayerScore }: GameBoar
           <div className={`PlayerColumn Player${index}`} key={index}>
             {
               player.scores.map((score, scoreIndex) =>
-                <div className="PlayerScore Score"
+                <div className={classNames('PlayerScore', 'Score', { Active: index === activePlayerIndex && scoreIndex === activeScoreIndex })}
                      onClick={onPlayerScoreClick(setNumberDialogProps, setPlayerScore, player, index, scoreIndex)}
                      key={scoreIndex}>
                   <span>{score}</span>
@@ -71,7 +138,7 @@ export const GameBoard = ({ players, setPlayerScores: setPlayerScore }: GameBoar
                   </div>
                 </div>)
             }
-            <div className="PlayerNewScore Score"
+            <div className={classNames('PlayerScore', 'Score', { Active: index === activePlayerIndex && player.scores.length === activeScoreIndex })}
                  onClick={onPlayerScoreClick(setNumberDialogProps, setPlayerScore, player, index, player.scores.length)}
                  key={-1}/>
           </div>)
