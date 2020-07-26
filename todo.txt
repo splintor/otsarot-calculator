@@ -1,3 +1,7 @@
+Add margin below scores to enable scroll
+Replace delete icons with "Delete" in input modal and "Delete All Scores" in menu to prevent accidental deletion
+Check that modal buttons are centered on iPad
+Check why we get old favicon in chrome on iPad
 Save users and game state
 Set proper style and colors
 Add Delete Score confirmation dialog / cancelable toast ?
