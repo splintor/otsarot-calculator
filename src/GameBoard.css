@@ -28,9 +28,9 @@
 
 .Winner {
   position: absolute;
-  top: 5px;
+  top: 0;
   left: 5px;
-  font-size: 1.6em;
+  font-size: 50px;
   animation: spin 1ms; /* animation-duration must be > 0 */
   animation-play-state: paused;
 }
