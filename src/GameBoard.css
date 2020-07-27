@@ -77,19 +77,3 @@
 .Score span {
   cursor: pointer;
 }
-
-.PlayerRemoveScoreButton {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  padding: 5px;
-  cursor: pointer;
-  color: red;
-  font-size: 0.7em;
-}
-
-.PlayerRemoveScoreButton:hover {
-  background-color: lightgrey;
-  border: 1px solid red;
-  border-radius: 50%;
-}

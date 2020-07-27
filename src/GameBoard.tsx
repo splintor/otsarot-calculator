@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { useKeyPress } from './hooks/useKeyPress';
 import { NumberDialog, NumberDialogProps } from './NumberDialog';
@@ -18,19 +18,19 @@ const onPlayerScoreClick = (setNumberDialogProps: (value: NumberDialogProps | nu
     playerIndex,
     onClose: () => setNumberDialogProps(null),
     onEnter: (score: number) => {
-      const newScores = scoreIndex === player.scores.length
-        ? [...player.scores, score]
-        : player.scores.map((v, i) => i === scoreIndex ? score : v);
+      const newScores = score
+        ? scoreIndex === player.scores.length
+          ? [...player.scores, score]
+          : player.scores.map((v, i) => i === scoreIndex ? score : v)
+        : player.scores.filter((_, i) => i !== scoreIndex)
       setNumberDialogProps(null)
       setPlayerScores(player, newScores);
     },
   });
 }
 
-const onPlayerRemoveScoreClick = (setPlayerScores: GameBoardProps['setPlayerScores'], player: Player, scoreIndex: number) => (event?: MouseEvent) => {
-  event?.stopPropagation();
-  const newScores = player.scores.filter((_, i) => i !== scoreIndex);
-  setPlayerScores(player, newScores);
+function onDeletePressed(setPlayerScores: GameBoardProps['setPlayerScores'], player: Player, scoreIndex: number) {
+  setPlayerScores(player, player.scores.filter((_, i) => i !== scoreIndex));
 }
 
 function getMaxTotal(players: Player[]): number | undefined {
@@ -68,13 +68,19 @@ export const GameBoard = ({ players, setPlayerScores: setPlayerScore }: GameBoar
           }
         }
       }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enterPressed, spacePressed, activeScoreIndex, activePlayerIndex, setPlayerScore, players, numberDialogProps])
 
+  useEffect(() => {
+    if (activePlayerIndex !== undefined && activeScoreIndex !== undefined) {
+      const activePlayer = players[activePlayerIndex];
       if (deletePressed && activeScoreIndex < activePlayer.scores.length && !numberDialogProps) {
-        onPlayerRemoveScoreClick(setPlayerScore, activePlayer, activeScoreIndex)(undefined);
+        onDeletePressed(setPlayerScore, activePlayer, activeScoreIndex);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [enterPressed, spacePressed, deletePressed, activeScoreIndex, activePlayerIndex, setPlayerScore, players, numberDialogProps])
+  }, [deletePressed])
 
   useEffect(() => {
     if (downPressed || upPressed) {
@@ -133,9 +139,6 @@ export const GameBoard = ({ players, setPlayerScores: setPlayerScore }: GameBoar
                      onClick={onPlayerScoreClick(setNumberDialogProps, setPlayerScore, player, index, scoreIndex)}
                      key={scoreIndex}>
                   <span>{score}</span>
-                  <div className="PlayerRemoveScoreButton"
-                       onClick={onPlayerRemoveScoreClick(setPlayerScore, player, scoreIndex)}>X
-                  </div>
                 </div>)
             }
             <div className={classNames('PlayerScore', 'Score', { Active: index === activePlayerIndex && player.scores.length === activeScoreIndex })}

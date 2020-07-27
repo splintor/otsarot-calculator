@@ -47,6 +47,10 @@ function App() {
     moveToSetup();
   }
 
+  const clearScores = () => {
+    setPlayers(players.map(p => new Player(p.name, [])));
+  }
+
   const toggleMenu = (evt: MouseEvent) => {
     setAppMenuVisible(!appMenuVisible);
     evt.stopPropagation();
@@ -76,6 +80,11 @@ function App() {
           {(players.length > 1 || gameStep === 'play') &&
           <li key="new-game">
             <a href="/" onClick={menuHandler(startNewGame)}>משחק חדש</a>
+          </li>
+          }
+          {(players.some(p => p.scores.length > 0) && gameStep === 'play') &&
+          <li key="clear-scores">
+            <a href="/" onClick={menuHandler(clearScores)}>איפוס נקודות</a>
           </li>
           }
           <li key="game-guide">

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import classNames from 'classnames';
 import './NumberDialog.css';
 import { useKeyPress } from './hooks/useKeyPress';
 
@@ -18,7 +18,7 @@ export const NumberDialog = ({ player, playerIndex, initialValue, onEnter, onClo
 
   const score = Number(value);
   const submit = () => {
-    if (score) {
+    if (score || initialValue) {
       onEnter(score);
     }
   }
@@ -30,7 +30,7 @@ export const NumberDialog = ({ player, playerIndex, initialValue, onEnter, onClo
   }, [escapePressed, onClose]);
 
   useEffect(() => {
-    if (enterPressed && score) {
+    if (enterPressed && (score || initialValue)) {
       onEnter(score);
     }
   }, [enterPressed, onEnter, score])
@@ -51,7 +51,11 @@ export const NumberDialog = ({ player, playerIndex, initialValue, onEnter, onClo
       </div>
 
       <div className="NumberDialogFooter">
-        <button onClick={submit} disabled={!score}>{initialValue ? 'עדכן' : 'הוסף'}</button>
+        <button onClick={submit}
+                disabled={!initialValue && !score}
+                className={classNames({ UpdatedScore: initialValue, NewScore: !initialValue, EmptyScore: !score })}>
+          {initialValue ? score ? 'עדכן' : 'מחק' : 'הוסף'}
+        </button>
         <button onClick={onClose}>ביטול</button>
       </div>
     </div>

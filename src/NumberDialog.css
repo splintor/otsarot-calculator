@@ -50,6 +50,18 @@
   padding: 8px 20px;
 }
 
+button.UpdatedScore.EmptyScore {
+  color: red;
+}
+
+button.UpdatedScore:not(.EmptyScore) {
+  color: green;
+}
+
+button.NewScore:not(.EmptyScore) {
+  color: blue;
+}
+
 .PlayerName {
   font-weight: bold;
 }

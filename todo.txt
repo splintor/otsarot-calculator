@@ -1,4 +1,3 @@
-Replace delete icons with "Delete" in input modal and "Delete All Scores" in menu to prevent accidental deletion
 Check why we get old favicon in chrome on iPad
 Save users and game state
 Set proper style and colors
