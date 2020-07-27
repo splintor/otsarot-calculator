@@ -25,9 +25,13 @@
   margin: auto;
   padding: 30px;
 }
+.NumberDialogContent label {
+  font-size: 1.4em;
+}
 
 .NumberDialogContent input {
   margin-inline-end: 10px;
+  margin-block-start: 10px;
   font-size: 1.1em;
   direction: ltr;
   text-align: right;
@@ -35,12 +39,15 @@
 
 .NumberDialogFooter {
   display: flex;
+  width: 100%;
   justify-content: space-evenly;
+  margin-block-start: 10px;
 }
 
 .NumberDialogFooter button {
   margin-top: 20px;
-  font-size: 1.1em
+  font-size: 1.3em;
+  padding: 8px 20px;
 }
 
 .PlayerName {
