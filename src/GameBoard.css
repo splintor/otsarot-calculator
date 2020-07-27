@@ -16,6 +16,7 @@
   flex-direction: row;
   width: 100vw;
   direction: rtl;
+  margin-bottom: 100px;
 }
 
 /* https://stackoverflow.com/a/50781428/46635 */

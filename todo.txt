@@ -1,4 +1,3 @@
-Add margin below scores to enable scroll
 Increase font-size of setup submit buttons
 Replace delete icons with "Delete" in input modal and "Delete All Scores" in menu to prevent accidental deletion
 Check that modal buttons are centered on iPad
