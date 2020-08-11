@@ -15,6 +15,7 @@
 .Buttons {
   display: flex;
   direction: rtl;
+  -webkit-justify-content: center;
   justify-content: center;
 }
 

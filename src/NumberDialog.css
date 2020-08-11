@@ -40,6 +40,7 @@
 .NumberDialogFooter {
   display: flex;
   width: 100%;
+  -webkit-justify-content: space-evenly;
   justify-content: space-evenly;
   margin-block-start: 10px;
 }
