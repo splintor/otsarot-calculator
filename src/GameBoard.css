@@ -30,7 +30,7 @@
   position: absolute;
   top: 0;
   left: 5px;
-  font-size: 50px;
+  font-size: 2.5em;
   animation: spin 1ms; /* animation-duration must be > 0 */
   animation-play-state: paused;
 }
