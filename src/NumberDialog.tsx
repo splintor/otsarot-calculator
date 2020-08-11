@@ -51,12 +51,12 @@ export const NumberDialog = ({ player, playerIndex, initialValue, onEnter, onClo
       </div>
 
       <div className="NumberDialogFooter">
+        <button onClick={onClose}>ביטול</button>
         <button onClick={submit}
                 disabled={!initialValue && !score}
                 className={classNames({ UpdatedScore: initialValue, NewScore: !initialValue, EmptyScore: !score })}>
           {initialValue ? score ? 'עדכן' : 'מחק' : 'הוסף'}
         </button>
-        <button onClick={onClose}>ביטול</button>
       </div>
     </div>
   </>
