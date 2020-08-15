@@ -30,7 +30,7 @@ h2 {
   position: fixed;
   width: 100vw;
   margin: 0;
-  padding: 10px;
+  padding: 0.4em;
   background-color: white;
   z-index: 100;
 }
@@ -38,25 +38,25 @@ h2 {
 .Instruction {
   direction: rtl;
   text-align: start;
-  width: 45vw;
+  width: 55vw;
   margin: 10px auto 20px;
 }
 
 .AppMenuButton {
   position: fixed;
   z-index: 210;
-  top: 8px;
-  left: 8px;
+  top: 0.1em;
+  left: 0.3em;
   cursor: pointer;
-  font-size: 1.4em;
+  font-size: 2em;
 }
 
 .AppMenu {
   position: fixed;
   z-index: 300;
   background-color: white;
-  top: 58px;
-  left: 8px;
+  top: 3.1em;
+  left: 0.7em;
   overflow-y: hidden;
   max-height: 0;
   transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
@@ -97,7 +97,7 @@ h2 {
 
 .GameBody {
   position: absolute;
-  top: 59px;
+  top: 3em;
   width: 100vw;
 }
 

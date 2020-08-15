@@ -1,6 +1,7 @@
 .SetupForm {
   display: flex;
   flex-direction: column;
+  font-size: 1.15m;
 }
 
 .SetupForm label {
@@ -15,7 +16,6 @@
 .Buttons {
   display: flex;
   direction: rtl;
-  -webkit-justify-content: center;
   justify-content: center;
 }
 

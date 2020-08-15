@@ -40,8 +40,7 @@
 .NumberDialogFooter {
   display: flex;
   width: 100%;
-  -webkit-justify-content: space-evenly;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   margin-block-start: 10px;
 }
 
@@ -49,6 +48,10 @@
   margin-top: 20px;
   font-size: 1.3em;
   padding: 8px 20px;
+}
+
+.NumberDialogFooter button:not(:first-child) {
+  margin-inline-start: 1em;
 }
 
 button.UpdatedScore.EmptyScore {

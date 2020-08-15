@@ -5,7 +5,7 @@
   width: 100vw;
   direction: rtl;
   position: fixed;
-  top: 59px;
+  top: 3em;
   z-index: 100;
 }
 
@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: row;
   width: 100vw;
-  direction: rtl;
+  directionp: rtl;
   margin-bottom: 100px;
 }
 
@@ -47,6 +47,12 @@
   background-color: aquamarine;
 }
 
+.PlayerName {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 .PlayerTotal {
   display: flex;
   direction: rtl;
@@ -66,7 +72,6 @@
   height: 100px;
   direction: ltr;
   display: flex;
-  -webkit-justify-content: center;
   justify-content: center;
   align-items: center;
 }
