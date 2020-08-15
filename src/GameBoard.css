@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: row;
   width: 100vw;
-  directionp: rtl;
+  direction: rtl;
   margin-bottom: 100px;
 }
 
