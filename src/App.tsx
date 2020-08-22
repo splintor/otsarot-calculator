@@ -58,7 +58,7 @@ function App() {
 
   return (
     <div className="App" onClick={() => setAppMenuVisible(false)}>
-      <div className="AppMenuButton" onClick={toggleMenu}><span role="img" aria-label="App Menu">☰</span></div>
+      <div className={`AppMenuButton ${appMenuVisible ? 'pressed' : ''}`} onClick={toggleMenu}><span role="img" aria-label="App Menu">☰</span></div>
       <h2>מחשבון אוצרות או צרות</h2>
       <div className="GameBody">
         {

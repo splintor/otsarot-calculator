@@ -10,19 +10,19 @@ body {
 
 @media only screen and (max-width: 300px) {
   .App {
-    font-size: 0.3em;
+    font-size: 0.4em;
   }
 }
 
 @media only screen and (max-width: 450px) {
   .App {
-    font-size: 0.4em;
+    font-size: 0.5em;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .App {
-    font-size: 0.5em;
+    font-size: 0.6em;
   }
 }
 
@@ -35,13 +35,6 @@ h2 {
   z-index: 100;
 }
 
-.Instruction {
-  direction: rtl;
-  text-align: start;
-  width: 45vw;
-  margin: 10px auto 20px;
-}
-
 .AppMenuButton {
   position: fixed;
   z-index: 210;
@@ -49,6 +42,10 @@ h2 {
   left: 0.3em;
   cursor: pointer;
   font-size: 2em;
+}
+
+.AppMenuButton.pressed {
+  color: blue;
 }
 
 .AppMenu {
@@ -88,7 +85,7 @@ h2 {
   direction: rtl;
   color: black;
   padding: 5px 15px 5px 20px;
-  font-size: 1em;
+  font-size: 1.5em;
 }
 
 .AppMenu a:hover {
