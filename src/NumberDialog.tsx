@@ -33,7 +33,7 @@ export const NumberDialog = ({ player, playerIndex, initialValue, onEnter, onClo
     if (enterPressed && (score || initialValue)) {
       onEnter(score);
     }
-  }, [enterPressed, onEnter, score])
+  }, [enterPressed, onEnter, score, initialValue])
 
   return <>
     <div className="NumberDialogBackdrop" onClick={onClose}/>
