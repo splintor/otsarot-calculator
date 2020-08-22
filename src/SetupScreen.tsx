@@ -69,6 +69,8 @@ export const SetupScreen = ({ players, setPlayers, onStart }: SetupScreenProps) 
     }
   }, [downPressed, upPressed, enterPressed, gotoGame]);
 
+  const displayedPlayers = players.length < MaxPlayers ? [...players, new Player()] : players;
+
   return (
     <div className="SetupForm">
       <div className="Instruction">
@@ -79,7 +81,7 @@ export const SetupScreen = ({ players, setPlayers, onStart }: SetupScreenProps) 
         כדי להתחיל להשתמש באתר, יש למלא את שמות השחקנים, וללחוץ על כפתור ההתחלה.
       </div>
       {
-        [...players, new Player()].map((player, index) =>
+        displayedPlayers.map((player, index) =>
           <label htmlFor={`player${index}`} dir="rtl" key={index}>
             {`שחקנ/ית ${index + 1}:`}
             <input type="text"
