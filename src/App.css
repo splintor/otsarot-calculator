@@ -30,7 +30,7 @@ h2 {
   position: fixed;
   width: 100vw;
   margin: 0;
-  padding: 0.4em;
+  padding: 0.4em 0;
   background-color: white;
   z-index: 100;
 }

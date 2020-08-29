@@ -1,10 +1,12 @@
 import React, { useState, MouseEvent, MouseEventHandler, useEffect } from 'react';
 import './App.css';
+import GithubCorner from 'react-github-corner';
 import { SetupScreen } from './SetupScreen';
 import { Player } from './Player';
 import { GameBoard } from './GameBoard';
 
 type GameSteps = 'setup' | 'play';
+const repoUrl = 'https://github.com/splintor/otsarot-calculator';
 
 function App() {
   const [gameStep, setGameStep] = useState<GameSteps>('setup')
@@ -59,7 +61,10 @@ function App() {
   return (
     <div className="App" onClick={() => setAppMenuVisible(false)}>
       <div className={`AppMenuButton ${appMenuVisible ? 'pressed' : ''}`} onClick={toggleMenu}><span role="img" aria-label="App Menu">☰</span></div>
-      <h2>מחשבון אוצרות או צרות</h2>
+      <h2>
+        <GithubCorner href={repoUrl} size={60} target="otsarot-github"/>
+        מחשבון אוצרות או צרות
+      </h2>
       <div className="GameBody">
         {
           gameStep === 'setup' &&
@@ -104,7 +109,7 @@ function App() {
                target="_blank">שלח משוב...</a>
           </li>
           <li key="github">
-            <a href="https://github.com/splintor/otsarot-calculator"
+            <a href={repoUrl}
                rel="noopener noreferrer"
                target="_blank">GitHub</a>
           </li>
