@@ -48,19 +48,19 @@
 }
 
 .PlayerName {
-  font-size: 1.5em;
+  font-size: 1.6em;
   font-weight: bold;
-  margin-bottom: 5px;
 }
 
 .PlayerTotal {
   display: flex;
   direction: rtl;
   align-items: center;
+  font-size: 1.6em;
 }
 
 .PlayerTotal .Total {
-  font-size: 1.6em;
+  font-size: 1.5em;
   font-weight: bold;
   direction: ltr;
   margin-inline-end: 5px;
@@ -82,4 +82,5 @@
 
 .Score span {
   cursor: pointer;
+  font-size: 3.1em;
 }

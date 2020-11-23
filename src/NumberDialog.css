@@ -23,7 +23,7 @@
   border: 4px solid blue;
   border-radius: 8px;
   margin: auto;
-  padding: 30px;
+  padding: 25px;
 }
 .NumberDialogContent label {
   font-size: 1.4em;
@@ -35,6 +35,7 @@
   font-size: 1.1em;
   direction: ltr;
   text-align: right;
+  font-size: 1.3em;
 }
 
 .NumberDialogFooter {
