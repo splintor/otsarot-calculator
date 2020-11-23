@@ -62,7 +62,7 @@ function App() {
     <div className="App" onClick={() => setAppMenuVisible(false)}>
       <div className={`AppMenuButton ${appMenuVisible ? 'pressed' : ''}`} onClick={toggleMenu}><span role="img" aria-label="App Menu">☰</span></div>
       <h2>
-        <GithubCorner href={repoUrl} size={60} target="OtsarotGitHubProject"/>
+        {gameStep === 'setup' && <GithubCorner href={repoUrl} size={60} target="OtsarotGitHubProject"/>}
         מחשבון אוצרות או צרות
       </h2>
       <div className="GameBody">
